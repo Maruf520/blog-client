@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  max-width: 100%;
+}
+
+/* Navigation Bar */
+.navbar {
+  position: fixed; /* Fixes the navbar to the top of the viewport */
+  top: 0; /* Ensures it aligns with the top edge of the browser */
+  left: 0; /* Aligns it to the left edge */
+  right: 0; /* Ensures it spans the full width */
+  z-index: 1000; /* Keeps the navbar above other elements */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #4267b2;
+  color: white;
+  height: 2.5em;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  margin: 0 10px;
+}
+
+.navbar .profile {
+  font-weight: bold;
+}
+
+/* Add padding to the body content to account for fixed navbar */
+body {
+  padding-top: 2.5em; /* Matches the navbar height to avoid overlapping content */
+}

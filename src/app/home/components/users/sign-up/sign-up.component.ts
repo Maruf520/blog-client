@@ -31,8 +31,8 @@ export class SignUpComponent implements OnInit {
       lastName: ['', Validators.required],
       mobile: ['', Validators.required],
       address: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', [Validators.required], [Validators.email]],
+      email: ['', Validators.required, Validators.email],
+      password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
     });
   }
@@ -65,21 +65,22 @@ export class SignUpComponent implements OnInit {
       email: this.email?.value,
       password: this.password?.value,
     };
-    if (this.userSignUpForm.valid) {
-      this.userService.createUser(user).subscribe({
-        next: (result) => {
-          console.log(result.data);
-          this.alertMessage = result.data;
-          this.alertType = 0;
-        },
-        error: (errors) => {
-          this.alertMessage = errors.error.error.message;
-          this.alertType = 2;
-        },
-      });
-    } else {
-      this.alertMessage = 'Please fill all required fields.';
-      this.alertType = 2;
-    }
+    //if (this.userSignUpForm.valid) {
+    this.userService.createUser(user).subscribe({
+      next: (result) => {
+        console.log(result.data);
+        this.alertMessage = result.data;
+        this.alertType = 0;
+      },
+      error: (errors) => {
+        this.alertMessage = errors.error.error.message;
+        this.alertType = 2;
+      },
+    });
+    //}
+    // else {
+    //   this.alertMessage = 'Please fill all required fields.';
+    //   this.alertType = 2;
+    // }
   }
 }

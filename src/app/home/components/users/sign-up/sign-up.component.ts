@@ -65,16 +65,21 @@ export class SignUpComponent implements OnInit {
       email: this.email?.value,
       password: this.password?.value,
     };
-    this.userService.createUser(user).subscribe({
-      next: (result) => {
-        console.log(result.data);
-        this.alertMessage = result.data;
-        this.alertType = 0;
-      },
-      error: (errors) => {
-        this.alertMessage = errors.error.error.message;
-        this.alertType = 2;
-      },
-    });
+    if (this.userSignUpForm.valid) {
+      this.userService.createUser(user).subscribe({
+        next: (result) => {
+          console.log(result.data);
+          this.alertMessage = result.data;
+          this.alertType = 0;
+        },
+        error: (errors) => {
+          this.alertMessage = errors.error.error.message;
+          this.alertType = 2;
+        },
+      });
+    } else {
+      this.alertMessage = 'Please fill all required fields.';
+      this.alertType = 2;
+    }
   }
 }

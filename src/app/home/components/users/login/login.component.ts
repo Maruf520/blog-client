@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../../services/user/user.service';
 import { TokenResponse } from '../../../types/user.type';
 import { CommonModule, Location } from '@angular/common';
@@ -25,8 +25,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
-    private location: Location
+    public userService: UserService,
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,14 +49,18 @@ export class LoginComponent implements OnInit {
         this.alertType = 0;
         this.alertMessage = 'Login successful';
         this.userService.activateToken(result);
-        // setTimeout(() => {
-        //   this.location.back();
-        // }, 1000);
+        setTimeout(() => {
+          this.location.back();
+        }, 1000);
       },
       error: (error) => {
         this.alertType = 2;
         this.alertMessage = error.error.error.message;
       },
     });
+  }
+  logOut(): void {
+    this.userService.logOut();
+    this.router.navigate(['home/login']);
   }
 }

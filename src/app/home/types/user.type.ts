@@ -17,7 +17,6 @@ export interface loggedInUser {
   lastName: string;
   mobile: string;
   address: string;
-  image: string | null;
   email: string;
 }
 

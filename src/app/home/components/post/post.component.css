@@ -125,7 +125,50 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+.text-danger {
+  color: red;
+  font-size: 0.9rem;
+}
 
 .submit-post:hover {
   background-color: #365899;
+}
+.write-post-title {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.post {
+  position: relative; /* Ensure the post container can reference the delete button */
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.post-body {
+  margin-bottom: 10px; /* Ensure space for the button */
+}
+
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 10; /* Ensure the button is above other content */
+}
+
+.delete-btn:hover {
+  background-color: darkred;
 }

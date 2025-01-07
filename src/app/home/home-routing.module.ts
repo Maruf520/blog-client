@@ -6,6 +6,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { SignUpComponent } from './components/users/sign-up/sign-up.component';
 import { ProfileComponent } from './components/users/profile/profile.component';
+import { authGuard } from './services/authGuard';
 const routes: Routes = [
   {
     path: '',
@@ -14,6 +15,7 @@ const routes: Routes = [
       {
         path: 'posts',
         component: PostComponent,
+        canActivate: [authGuard],
       },
       {
         path: 'comments',

@@ -1,5 +1,5 @@
 <div class="login-container">
-  <div class="login-box">
+  <div class="login-box" *ngIf="!userService.isUserAuthenticated">
     <h2>Login</h2>
     <form [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
       <div class="input-group">
@@ -62,5 +62,9 @@
         {{ alertMessage }}
       </div>
     </form>
+  </div>
+  <div class="login-status" *ngIf="userService.isUserAuthenticated">
+    <p>You are already logged in!</p>
+    <button class="logout-btn" (click)="logOut()">Logout</button>
   </div>
 </div>

@@ -1,8 +1,11 @@
 <div class="container">
   <div class="profile-section">
     <img src="profile-pic.jpg" alt="Profile Picture" class="profile-pic" />
-    <h2>John Doe</h2>
-    <p>Email: john.doeexample.com</p>
+    <h2>
+      {{ userService.loggedInUserInfos.firstName }}
+      {{ userService.loggedInUserInfos.lastName }}
+    </h2>
+    <p>Email: {{ userService.loggedInUserInfos.email }}</p>
     <p>Bio: A passionate blogger and tech enthusiast.</p>
     <button>Edit Profile</button>
   </div>

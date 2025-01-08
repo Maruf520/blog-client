@@ -1,5 +1,21 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+  inject,
+} from '@angular/core';
 import { CommentComponent } from '../comment/comment.component';
+import { MatButtonModule } from '@angular/material/button';
+
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import {
   AbstractControl,
   FormBuilder,
@@ -12,11 +28,19 @@ import { CommonModule } from '@angular/common';
 import { Observable, Subscription } from 'rxjs';
 import { Post } from '../../types/post.type';
 import { ApiResponse } from '../../types/apiReponse.type';
+import { PopupDialogComponent } from '../popup-dialog/popup-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [CommentComponent, ReactiveFormsModule, CommonModule],
+  imports: [
+    CommentComponent,
+    ReactiveFormsModule,
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css',
 })
@@ -40,6 +64,26 @@ export class PostComponent implements OnDestroy, OnInit {
       body: ['', [Validators.required]],
     });
   }
+
+  readonly dialog = inject(MatDialog);
+
+  openDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    const dialogRef = this.dialog.open(PopupDialogComponent, {
+      enterAnimationDuration,
+      exitAnimationDuration,
+      hasBackdrop: true,
+      disableClose: false,
+    });
+
+    dialogRef.backdropClick().subscribe(() => {
+      console.log('Backdrop clicked');
+      dialogRef.close();
+    });
+  }
+
   ngOnInit(): void {
     this.loadPosts();
   }
@@ -89,17 +133,28 @@ export class PostComponent implements OnDestroy, OnInit {
     );
   }
   deletePost(id: number): void {
-    this.subscriptions.add(
-      this.postService.deletePost(id).subscribe({
-        next: (response) => {
-          this.alertMessage = response.data;
-          this.loadPosts();
-        },
-        error: (error) => {
-          this.alertMessage = error.error.message;
-        },
-      })
-    );
+    const dialogRef = this.dialog.open(PopupDialogComponent, {
+      width: '300px',
+      enterAnimationDuration: '200ms',
+      exitAnimationDuration: '200ms',
+    });
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.subscriptions.add(
+          this.postService.deletePost(id).subscribe({
+            next: (response) => {
+              this.alertMessage = response.data;
+              this.loadPosts();
+            },
+            error: (error) => {
+              this.alertMessage = error.error.message;
+            },
+          })
+        );
+      } else {
+        console.log('Deletion canceled');
+      }
+    });
   }
 
   reset(): void {

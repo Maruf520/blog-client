@@ -1,0 +1,23 @@
+<h2 mat-dialog-title class="dialog-title">Delete Post</h2>
+<mat-dialog-content class="dialog-content">
+  <p>Would you like to delete <strong>this post?</strong>?</p>
+</mat-dialog-content>
+<mat-dialog-actions class="dialog-actions">
+  <button
+    mat-button
+    mat-dialog-close
+    (click)="onConfirm(false)"
+    class="cancel-button"
+  >
+    No
+  </button>
+  <button
+    mat-button
+    mat-dialog-close
+    (click)="onConfirm(true)"
+    cdkFocusInitial
+    class="confirm-button"
+  >
+    Yes
+  </button>
+</mat-dialog-actions>

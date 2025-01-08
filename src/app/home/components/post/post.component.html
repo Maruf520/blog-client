@@ -35,7 +35,19 @@
       <p>
         {{ post.body }}
       </p>
-      <button class="delete-btn" (click)="deletePost(post.id)">Delete</button>
+      <!-- <button class="delete-btn" (click)="deletePost(post.id)">Delete</button> -->
+      <button
+        class="delete-btn"
+        mat-raised-button
+        color="primary"
+        (click)="deletePost(post.id)"
+      >
+        Delete
+      </button>
+      <!-- <button class="delete-btn" mat-fab aria-label="Example icon button with a delete icon">
+        <mat-icon>delete</mat-icon>
+      </button> -->
+
       <div class="actions">
         <button>Like</button>
         <button>Comment</button>

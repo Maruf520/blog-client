@@ -1,28 +1,7 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ChangeDetectionStrategy,
-  inject,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { CommentComponent } from '../comment/comment.component';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-
-import {
-  MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
 import { PostService } from '../../services/post/post.service';
 import { CommonModule } from '@angular/common';
 import { Observable, Subscription } from 'rxjs';
@@ -30,6 +9,14 @@ import { Post } from '../../types/post.type';
 import { ApiResponse } from '../../types/apiReponse.type';
 import { PopupDialogComponent } from '../popup-dialog/popup-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-post',
@@ -40,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css',
@@ -162,6 +150,21 @@ export class PostComponent implements OnDestroy, OnInit {
       title: [''],
       body: [''],
     });
+  }
+  onEdit(id: number) {
+    console.log('Edit action triggered');
+    // Add your edit logic here
+  }
+
+  onUpdate(id: number) {
+    console.log('Update action triggered');
+    // Add your update logic here
+  }
+
+  onDelete(id: number) {
+    console.log('Delete action triggered');
+    this.deletePost(id);
+    // Add your delete logic here
   }
 
   ngOnDestroy(): void {

@@ -175,3 +175,15 @@ body {
 .cdk-overlay-backdrop {
   background-color: rgba(0, 0, 0, 0.32); /* Default backdrop color */
 }
+.mat-icon-button {
+  color: #555;
+  display: inline-block;
+}
+
+.mat-menu {
+  font-family: Roboto, Arial, sans-serif;
+}
+
+button {
+  margin: 5px;
+}

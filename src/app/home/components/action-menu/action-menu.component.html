@@ -1,0 +1,22 @@
+<div class="actions-container">
+  <!-- Three vertical dots button -->
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="More actions">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <!-- Popup Menu -->
+  <mat-menu #menu="matMenu" xPosition="before" yPosition="above">
+    <button mat-menu-item (click)="onEdit()">
+      <mat-icon>edit</mat-icon>
+      <span>Edit</span>
+    </button>
+    <button mat-menu-item (click)="onUpdate()">
+      <mat-icon>update</mat-icon>
+      <span>Update</span>
+    </button>
+    <button mat-menu-item (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
+      <span>Delete</span>
+    </button>
+  </mat-menu>
+</div>

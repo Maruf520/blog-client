@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { loggedInUser, TokenResponse, User } from '../../types/user.type';
+import {
+  Author,
+  loggedInUser,
+  TokenResponse,
+  User,
+} from '../../types/user.type';
 
 @Injectable({
   providedIn: 'root',
@@ -114,19 +119,8 @@ export class UserService {
     }
   }
 
-  // getUser(): Observable<User> {
-  //   const storedUser = localStorage.getItem('user');
-
-  //   if (storedUser) {
-  //     const user = JSON.parse(storedUser);
-
-  //     console.log('User first name:', user.firstName);
-  //     console.log('User last name:', user.lastName);
-  //     console.log('User address:', user.address);
-  //     console.log('User email:', user.email);
-  //     console.log('User mobile:', user.mobile);
-  //   } else {
-  //     console.log('No user found in localStorage');
-  //   }
-  // }
+  getUser(userId: string): Observable<Author> {
+    const url: string = `https://localhost:44389/api/Auth/${userId}`;
+    return this.httpClient.get<Author>(url);
+  }
 }

@@ -1,37 +1,69 @@
 .comments {
   margin-top: 10px;
-  padding: 10px;
-  background: #f9f9f9;
-  border-radius: 4px;
+  padding: 15px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .comments h3 {
-  margin: 0 0 10px 0;
-  font-size: 16px;
-  color: #333;
+  margin: 0 0 15px 0;
+  font-size: 18px;
+  color: #444;
+  font-weight: bold;
 }
 
-.comments p {
-  margin: 5px 0;
+.comments .comment-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ececec;
+  border-radius: 6px;
+}
+
+.comments .comment-item .comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.comments .comment-item .username {
+  font-weight: bold;
+  color: #4267b2;
+}
+
+.comments .comment-item .time {
+  font-size: 12px;
+  color: #888;
+}
+
+.comments .comment-item p {
+  margin: 0;
   font-size: 14px;
   color: #555;
 }
 
 .comments textarea {
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 12px;
+  margin: 15px 0;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 6px;
+  resize: none;
 }
 
 .comments button {
   background-color: #4267b2;
   color: white;
   border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 8px 12px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .comments button:hover {

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserService } from '../user/user.service';
 import { ApiResponse } from '../../types/apiReponse.type';
+import { GetPost } from '../../types/user.type';
 
 @Injectable({
   providedIn: 'root',
@@ -21,14 +22,14 @@ export class PostService {
       headers: { authorization: `Bearer ${this.userService.token}` },
     });
   }
-  getAllPosts(): Observable<ApiResponse<Post[]>> {
+  getAllPosts(): Observable<ApiResponse<GetPost[]>> {
     const url: string = 'https://localhost:44389/api/Post/getallposts';
-    return this.httpClient.get<ApiResponse<Post[]>>(url, {
+    return this.httpClient.get<ApiResponse<GetPost[]>>(url, {
       headers: { authorization: `Bearer ${this.userService.token}` },
     });
   }
 
-  deletePost(postId: number): Observable<ApiResponse<any>> {
+  deletePost(postId: string): Observable<ApiResponse<any>> {
     const url = `https://localhost:44389/api/Post?id=${postId}`;
     return this.httpClient.delete<ApiResponse<any>>(url, {
       headers: { authorization: `Bearer ${this.userService.token}` },

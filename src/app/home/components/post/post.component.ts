@@ -17,6 +17,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { GetPost } from '../../types/user.type';
 
 @Component({
   selector: 'app-post',
@@ -37,7 +38,7 @@ export class PostComponent implements OnDestroy, OnInit {
   alertMessage: string = '';
   alertType: number = 0;
   submitted = false;
-  allPost: ApiResponse<Post[]> = {
+  allPost: ApiResponse<GetPost[]> = {
     isSuccess: false,
     isFailure: true,
     error: null,
@@ -88,7 +89,7 @@ export class PostComponent implements OnDestroy, OnInit {
     const post: Post = {
       title: this.title?.value,
       body: this.body?.value,
-      id: 0,
+      id: '',
     };
     this.submitted = true;
     if (this.postForm.valid) {
@@ -120,7 +121,7 @@ export class PostComponent implements OnDestroy, OnInit {
       })
     );
   }
-  deletePost(id: number): void {
+  deletePost(id: string): void {
     const dialogRef = this.dialog.open(PopupDialogComponent, {
       width: '300px',
       enterAnimationDuration: '200ms',
@@ -151,20 +152,17 @@ export class PostComponent implements OnDestroy, OnInit {
       body: [''],
     });
   }
-  onEdit(id: number) {
+  onEdit(id: string) {
     console.log('Edit action triggered');
-    // Add your edit logic here
   }
 
-  onUpdate(id: number) {
+  onUpdate(id: string) {
     console.log('Update action triggered');
-    // Add your update logic here
   }
 
-  onDelete(id: number) {
+  onDelete(id: string) {
     console.log('Delete action triggered');
     this.deletePost(id);
-    // Add your delete logic here
   }
 
   ngOnDestroy(): void {

@@ -187,3 +187,28 @@ body {
 button {
   margin: 5px;
 }
+.red-delete-button {
+  color: #ffffff; /* White text for contrast */
+  background-color: #f44336; /* Red background */
+  border-radius: 50px; /* Rounded corners */
+  padding: 8px 20px; /* Padding for the button */
+  display: inline-flex; /* Align icon and text */
+  align-items: center; /* Center the text and icon vertically */
+  justify-content: center; /* Center the text and icon horizontally */
+  font-weight: 600; /* Bold text for better visibility */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+}
+
+.red-delete-button mat-icon {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+.red-delete-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.red-delete-button:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.5); /* Add a glowing red focus border */
+}

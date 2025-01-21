@@ -1,6 +1,46 @@
-<div class="comments">
+<!-- <div class="comments">
   <h3>Comments</h3>
   <p>User1: This is a great post!</p>
-  <textarea placeholder="Write a comment..."></textarea>
-  <button>Post Comment</button>
+  <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+    <textarea
+      placeholder="Write a comment..."
+      formControlName="content"
+    ></textarea>
+    <span
+      class="text-danger"
+      *ngIf="submitted && content?.errors?.['required']"
+    >
+      You can't put any empty comment.
+    </span>
+    <button>Post Comment</button>
+  </form>
+</div> -->
+
+<div class="comments">
+  <h3>Comments</h3>
+
+  <!-- Example of a Comment -->
+  <div class="comment-item" *ngFor="let comment of comments">
+    <div class="comment-header">
+      <!-- <span class="username">{{ getUserName(comment.createdBy) | async }}</span> -->
+      <span class="username">Name</span>
+      <span class="time">{{ comment.createdAt | date }}</span>
+    </div>
+    <p>{{ comment.content }}</p>
+  </div>
+
+  <!-- Comment Form -->
+  <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+    <textarea
+      placeholder="Write a comment..."
+      formControlName="content"
+    ></textarea>
+    <span
+      class="text-danger"
+      *ngIf="submitted && content?.errors?.['required']"
+    >
+      You can't post an empty comment.
+    </span>
+    <button>Post Comment</button>
+  </form>
 </div>

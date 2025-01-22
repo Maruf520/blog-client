@@ -7,6 +7,7 @@ import {
   TokenResponse,
   User,
 } from '../../types/user.type';
+import { ApiResponse } from '../../types/apiReponse.type';
 
 @Injectable({
   providedIn: 'root',
@@ -119,8 +120,8 @@ export class UserService {
     }
   }
 
-  getUser(userId: string): Observable<Author> {
+  getUser(userId: string): Observable<ApiResponse<Author>> {
     const url: string = `https://localhost:44389/api/Auth/${userId}`;
-    return this.httpClient.get<Author>(url);
+    return this.httpClient.get<ApiResponse<Author>>(url);
   }
 }

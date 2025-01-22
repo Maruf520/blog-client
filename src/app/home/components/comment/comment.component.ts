@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -20,7 +20,7 @@ import { UserService } from '../../services/user/user.service';
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css',
 })
-export class CommentComponent implements OnDestroy {
+export class CommentComponent implements OnDestroy, OnInit {
   commentForm!: FormGroup;
   alertMessage: string = '';
   alertType: number = 0;
@@ -33,6 +33,7 @@ export class CommentComponent implements OnDestroy {
     image: null,
     email: '',
   };
+  userNames: { [userId: string]: string } = {};
   subscriptions: Subscription = new Subscription();
   @Input() comments: Comment[] = [];
   @Input() postId!: string;
@@ -51,6 +52,20 @@ export class CommentComponent implements OnDestroy {
     return this.commentForm.get('content');
   }
 
+  ngOnInit() {
+    this.comments.forEach((comment) => {
+      this.fetchUserName(comment.createdBy);
+    });
+  }
+  fetchUserName(userId: string): void {
+    if (!this.userNames[userId]) {
+      this.userService.getUser(userId).subscribe((response) => {
+        this.userNames[
+          userId
+        ] = `${response.data.firstName} ${response.data.lastName}`;
+      });
+    }
+  }
   onSubmit() {
     this.submitted = true;
     if (this.content?.value.trim()) {
@@ -66,6 +81,7 @@ export class CommentComponent implements OnDestroy {
             this.alertMessage = 'Posted Successfully!';
             this.reset();
             this.loadPostComments(this.postId);
+            this.fetchUserName(result.data);
           },
           error: (error) => {
             this.alertMessage = error.error.message;
@@ -95,10 +111,8 @@ export class CommentComponent implements OnDestroy {
     });
   }
 
-  getUserName(userId: string): Observable<string> {
-    return this.userService
-      .getUser(userId)
-      .pipe(map((response) => `${response.firstName} ${response.lastName}`));
+  getUserName(userId: string): string {
+    return this.userNames[userId] || 'Loading...';
   }
 
   ngOnDestroy(): void {

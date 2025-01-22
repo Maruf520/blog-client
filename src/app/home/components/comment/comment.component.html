@@ -22,14 +22,12 @@
   <!-- Example of a Comment -->
   <div class="comment-item" *ngFor="let comment of comments">
     <div class="comment-header">
-      <!-- <span class="username">{{ getUserName(comment.createdBy) | async }}</span> -->
-      <span class="username">Name</span>
+      <span class="username">{{ "@" + getUserName(comment.createdBy) }}</span>
       <span class="time">{{ comment.createdAt | date }}</span>
     </div>
     <p>{{ comment.content }}</p>
   </div>
 
-  <!-- Comment Form -->
   <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
     <textarea
       placeholder="Write a comment..."

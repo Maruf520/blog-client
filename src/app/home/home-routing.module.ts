@@ -21,18 +21,18 @@ const routes: Routes = [
         path: 'comments',
         component: CommentComponent,
       },
-      {
-        path: 'login',
-        component: LoginComponent,
-      },
-      {
-        path: 'signup',
-        component: SignUpComponent,
-      },
-      {
-        path: 'profile',
-        component: ProfileComponent,
-      },
+      // {
+      //   path: 'login',
+      //   component: LoginComponent,
+      // },
+      // {
+      //   path: 'signup',
+      //   component: SignUpComponent,
+      // },
+      // {
+      //   path: 'profile',
+      //   component: ProfileComponent,
+      // },
     ],
   },
 ];

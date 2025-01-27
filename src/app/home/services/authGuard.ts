@@ -9,9 +9,7 @@ import { map } from 'rxjs';
 export const authGuard = (next: ActivatedRouteSnapshot) => {
   return inject(UserService).isUserAuthenticated$.pipe(
     map((isAuthenticated) =>
-      isAuthenticated
-        ? true
-        : createUrlTreeFromSnapshot(next, ['/', 'home', 'login'])
+      isAuthenticated ? true : createUrlTreeFromSnapshot(next, ['/', 'login'])
     )
   );
 };

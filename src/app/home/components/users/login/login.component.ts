@@ -61,6 +61,6 @@ export class LoginComponent implements OnInit {
   }
   logOut(): void {
     this.userService.logOut();
-    this.router.navigate(['home/login']);
+    this.router.navigate(['/login']);
   }
 }

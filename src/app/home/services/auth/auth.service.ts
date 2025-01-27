@@ -15,10 +15,14 @@ export class AuthService {
   }
 
   resetPassword(resetPassword: PasswordReset): Observable<any> {
-    return this.http.post(`${this.apiUrl}/reset-password`, {
-      email: resetPassword.email,
-      token: resetPassword.token,
-      newPassword: resetPassword.newPassword,
-    });
+    return this.http.post(
+      `${this.apiUrl}/reset-password`,
+      {
+        email: resetPassword.email,
+        token: resetPassword.token,
+        newPassword: resetPassword.newPassword,
+      },
+      { responseType: 'text' }
+    );
   }
 }

@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PasswordReset } from '../../../types/resetPassword.type';
 import { AuthService } from '../../../services/auth/auth.service';
 
@@ -28,12 +28,13 @@ export class ResetPasswordComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.resetPasswordForm = this.fb.group(
       {
-        newPassword: ['', [Validators.required]],
+        newPassword: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
       },
       { validators: this.passwordsMatch }
@@ -71,9 +72,12 @@ export class ResetPasswordComponent implements OnInit {
           next: (response) => {
             this.alertMessage = response;
             this.alertType = 0;
+            this.router.navigate(['/login'], {
+              state: { message: 'Password reset successfull. Please log in.' },
+            });
           },
           error: (error) => {
-            this.alertMessage = error.message;
+            this.alertMessage = error.error;
             this.alertType = 2;
           },
         });

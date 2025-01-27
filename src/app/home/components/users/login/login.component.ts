@@ -35,6 +35,12 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { message: string };
+
+    if (state?.message) {
+      this.alertMessage = state.message;
+    }
   }
   get email(): AbstractControl<any, any> | null {
     return this.userLoginForm.get('email');
